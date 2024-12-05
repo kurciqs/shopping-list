@@ -1,20 +1,20 @@
 <template>
   
   <h2>Nova polozka</h2>
-  <input v-model="input">
+  <input v-model="newItemName">
 	<button @click="addItem()">Add to list</button>
   
   <h2>Polozky</h2>
 	<ul>	
-    <li v-for="item in validItems" :key="`item-${item.id}`">
-      <span @click="deleteItem(item)" style="margin-right: 15px"> X </span>
+    <li v-for="item in validItems" :key="item.id">
+      <span @click="deleteItem(item)" class="item"> X </span>
       {{item.text}}
     </li>
 	</ul>
 
   <h2>Zmazane Polozky</h2>
 	<ul>	
-    <li v-for="item in deletedItems" :key="`item-${item.id}`">
+    <li v-for="item in deletedItems" :key="item.id">
       <s>
         {{item.text}}
       </s>
@@ -27,7 +27,7 @@
 export default {
 	data() {
 		return {
-			input: '',
+			newItemName: '',
 			items: []
 		}
 	},
@@ -35,10 +35,10 @@ export default {
 		addItem() {
 			this.items.push({
 				id: this.items.length + 1,
-				text: this.input,
+				text: this.newItemName,
 				is_deleted: false
 			})
-			this.input = ''
+			this.newItemName = ''
 		},
     deleteItem(item) {
 			item.is_deleted = true
@@ -57,5 +57,7 @@ export default {
 </script>
 
 <style>
-
+.item {
+	margin-right: 15px
+}
 </style>
